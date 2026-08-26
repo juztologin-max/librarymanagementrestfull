@@ -7,19 +7,24 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.hms.api.login.JwtFilter;
+
+import jakarta.servlet.DispatcherType;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
 	private final JwtFilter jwtFilter;
+	private final AuthenticationEntryPoint authenticationEntryPoint;
 
-	public SecurityConfiguration(JwtFilter jwtFilter) {
+	public SecurityConfiguration(JwtFilter jwtFilter, AuthenticationEntryPoint authenticationEntryPoint) {
 		this.jwtFilter = jwtFilter;
+		this.authenticationEntryPoint = authenticationEntryPoint;
 	}
 
 	@Bean
@@ -28,11 +33,13 @@ public class SecurityConfiguration {
 		http.authorizeHttpRequests(auth ->
 		       auth.requestMatchers("/login","/logout").permitAll()
 		           .requestMatchers("/login/test").authenticated()
+		           .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
     		       .anyRequest().denyAll())
 		    .csrf(AbstractHttpConfigurer::disable)
 		    .sessionManagement(session ->
 		           session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling(ex->ex.authenticationEntryPoint(authenticationEntryPoint));
 		//@formatter:on
 
 		return http.build();

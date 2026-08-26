@@ -1,10 +1,10 @@
-package com.hms.api.login;
+package com.hms.api.login.userroles;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.hms.api.login.UserRoles.UserRolesEnum;
+import com.hms.api.login.userroles.UserRoles.UserRolesEnum;
 
 public interface UserRolesRepo extends JpaRepository<UserRoles, Long> {
     @Override

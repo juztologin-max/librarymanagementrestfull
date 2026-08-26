@@ -1,4 +1,4 @@
-package com.hms.api.login;
+package com.hms.api.login.userroles;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

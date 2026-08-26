@@ -8,9 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.hms.api.login.LoginUser;
 import com.hms.api.login.UserDetailsRepo;
-import com.hms.api.login.UserRoles;
-import com.hms.api.login.UserRolesRepo;
-import com.hms.api.login.UserRoles.UserRolesEnum;
+import com.hms.api.login.userroles.UserRoles;
+import com.hms.api.login.userroles.UserRolesRepo;
+import com.hms.api.login.userroles.UserRoles.UserRolesEnum;
 
 @Configuration
 public class InitialDataInserter {

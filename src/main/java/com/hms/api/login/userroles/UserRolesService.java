@@ -1,4 +1,4 @@
-package com.hms.api.login;
+package com.hms.api.login.userroles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
