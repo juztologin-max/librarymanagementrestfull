@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "initialdata.insertdefaults",
+  "type": "java.lang.Boolean",
+  "description": "Insert default roles(ROLE_ADMIN,ROLE_CUSTOMER,ROLE_STAFF) and users(admin,customer,staff) with password=pass"
+}]}
